@@ -252,8 +252,8 @@ services:
       # Set to debug to get more fine-grained logs
       - LOG_LEVEL=${LOG_LEVEL:-info}
     volumes:
-      - model_cache_torch:/root/.cache/torch/
-      - model_cache_huggingface:/root/.cache/huggingface/
+      - model_cache_torch:/mnt/.cache/torch/
+      - model_cache_huggingface:/mnt/.cache/huggingface/
     logging:
       driver: json-file
       options:
