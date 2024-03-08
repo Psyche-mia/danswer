@@ -1,2 +1,298 @@
-nohup: ignoring input
-nohup: failed to run command 'docker-compose': No such file or directory
+#0 building with "default" instance using docker driver
+
+#1 [api_server internal] load build definition from Dockerfile
+#1 transferring dockerfile: 2.34kB done
+#1 DONE 0.0s
+
+#2 [background internal] load build definition from Dockerfile
+#2 transferring dockerfile: 2.34kB done
+#2 DONE 0.0s
+
+#3 [api_server internal] load metadata for docker.io/library/python:3.11.7-slim-bookworm
+#3 DONE 2.1s
+
+#4 [api_server internal] load .dockerignore
+#4 transferring context: 175B done
+#4 DONE 0.0s
+
+#5 [background internal] load .dockerignore
+#5 transferring context: 175B done
+#5 DONE 0.0s
+
+#6 [background stage-0  1/12] FROM docker.io/library/python:3.11.7-slim-bookworm@sha256:53d6284a40eae6b625f22870f5faba6c54f2a28db9027408f4dee111f1e885a2
+#6 DONE 0.0s
+
+#7 [api_server internal] load build context
+#7 transferring context: 20.26kB 0.0s done
+#7 DONE 0.0s
+
+#8 [api_server stage-0  9/12] COPY ./shared_models /app/shared_models
+#8 CACHED
+
+#9 [api_server stage-0 10/12] COPY ./alembic /app/alembic
+#9 CACHED
+
+#10 [api_server stage-0  6/12] RUN apt-get remove -y --allow-remove-essential perl-base xserver-common xvfb cmake libldap-2.5-0 libldap-2.5-0 &&     apt-get autoremove -y &&     rm -rf /var/lib/apt/lists/* &&     rm /usr/local/lib/python3.11/site-packages/tornado/test/test.key
+#10 CACHED
+
+#11 [api_server stage-0  5/12] RUN --mount=type=cache,target=/pip_cache pip install --cache-dir=/pip_cache --upgrade -r /tmp/requirements.txt &&     pip uninstall -y py &&     playwright install chromium && playwright install-deps chromium &&     ln -s /usr/local/bin/supervisord /usr/bin/supervisord
+#11 CACHED
+
+#12 [api_server stage-0  8/12] COPY ./danswer /app/danswer
+#12 CACHED
+
+#13 [api_server stage-0 11/12] COPY ./alembic.ini /app/alembic.ini
+#13 CACHED
+
+#14 [api_server stage-0  3/12] RUN apt-get update &&     apt-get install -y cmake curl zip ca-certificates libgnutls30=3.7.9-2+deb12u2 &&     rm -rf /var/lib/apt/lists/* &&     apt-get clean
+#14 CACHED
+
+#15 [api_server stage-0  4/12] COPY ./requirements/default.txt /tmp/requirements.txt
+#15 CACHED
+
+#16 [api_server stage-0  7/12] WORKDIR /app
+#16 CACHED
+
+#17 [api_server stage-0  2/12] RUN echo "DANSWER_VERSION: 0.3-dev"
+#17 CACHED
+
+#18 [api_server stage-0 12/12] COPY supervisord.conf /usr/etc/supervisord.conf
+#18 CACHED
+
+#19 [api_server] exporting to image
+#19 exporting layers done
+#19 writing image sha256:3af0382cd72b0ce28f40ec17543e3c716133b5260bec5c51ee57cf6c57a96fca done
+#19 naming to docker.io/danswer/danswer-backend:latest done
+#19 DONE 0.0s
+
+#20 [background internal] load build context
+#20 transferring context: 20.26kB 0.0s done
+#20 DONE 0.0s
+
+#21 [background] exporting to image
+#21 exporting layers done
+#21 writing image sha256:99a1767bb983c6ae4580aef13db3366facfa8fa1071806792c8dbb4fa8ee1c72 done
+#21 naming to docker.io/danswer/danswer-backend:latest done
+#21 DONE 0.0s
+
+#22 [web_server internal] load build definition from Dockerfile
+#22 transferring dockerfile: 3.10kB done
+#22 DONE 0.0s
+
+#23 [web_server internal] load metadata for docker.io/library/node:20-alpine
+#23 DONE 1.3s
+
+#24 [web_server internal] load .dockerignore
+#24 transferring context: 59B done
+#24 DONE 0.0s
+
+#25 [web_server base 1/2] FROM docker.io/library/node:20-alpine@sha256:c0a3badbd8a0a760de903e00cedbca94588e609299820557e72cba2a53dbaa2c
+#25 DONE 0.0s
+
+#26 [web_server runner 3/7] RUN addgroup --system --gid 1001 nodejs
+#26 CACHED
+
+#27 [web_server base 2/2] RUN echo "DANSWER_VERSION: 0.3-dev"
+#27 CACHED
+
+#28 [web_server runner 2/7] RUN rm -rf /usr/local/lib/node_modules
+#28 CACHED
+
+#29 [web_server runner 4/7] RUN adduser --system --uid 1001 nextjs
+#29 CACHED
+
+#30 [web_server builder 1/4] WORKDIR /app
+#30 CACHED
+
+#31 [web_server internal] load build context
+#31 transferring context: 18.81kB 0.0s done
+#31 DONE 0.0s
+
+#32 [web_server deps 2/4] WORKDIR /app
+#32 CACHED
+
+#33 [web_server deps 1/4] RUN apk add --no-cache libc6-compat
+#33 CACHED
+
+#34 [web_server deps 3/4] COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+#34 CACHED
+
+#35 [web_server deps 4/4] RUN   if [ -f yarn.lock ]; then yarn --frozen-lockfile;   elif [ -f package-lock.json ]; then npm ci;   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile;   else echo "Lockfile not found." && exit 1;   fi
+#35 199.8 
+#35 199.8 added 606 packages, and audited 607 packages in 3m
+#35 199.8 
+#35 199.8 195 packages are looking for funding
+#35 199.8   run `npm fund` for details
+#35 199.8 
+#35 199.8 found 0 vulnerabilities
+#35 199.8 npm notice 
+#35 199.8 npm notice New minor version of npm available! 10.2.4 -> 10.5.0
+#35 199.8 npm notice Changelog: <https://github.com/npm/cli/releases/tag/v10.5.0>
+#35 199.8 npm notice Run `npm install -g npm@10.5.0` to update!
+#35 199.8 npm notice 
+#35 DONE 200.1s
+
+#36 [web_server builder 2/4] COPY --from=deps /app/node_modules ./node_modules
+#36 DONE 8.7s
+
+#37 [web_server builder 3/4] COPY . .
+#37 DONE 0.1s
+
+#38 [web_server builder 4/4] RUN npm run build
+#38 1.279 
+#38 1.279 > qa@0.2-dev build
+#38 1.279 > next build
+#38 1.279 
+#38 2.924    ▲ Next.js 14.1.0
+#38 2.925 
+#38 2.977    Creating an optimized production build ...
+#38 115.4  ✓ Compiled successfully
+#38 115.4    Linting and checking validity of types ...
+#38 129.3 
+#38 129.3 ./src/app/admin/documents/explorer/Explorer.tsx
+#38 129.3 152:6  Warning: React Hook useEffect has missing dependencies: 'onSearch', 'router', and 'timeoutId'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/app/admin/personas/PersonaEditor.tsx
+#38 129.3 82:6  Warning: React Hook useEffect has missing dependencies: 'existingPersona.num_chunks', 'existingPrompt', and 'isUpdate'. Either include them or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/app/auth/verify-email/Verify.tsx
+#38 129.3 46:6  Warning: React Hook useEffect has a missing dependency: 'verify'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/app/chat/Chat.tsx
+#38 129.3 143:6  Warning: React Hook useEffect has missing dependencies: 'availablePersonas', 'chatSessionId', 'clearSelectedDocuments', 'defaultSelectedPersonaId', 'filterManager', and 'isStreaming'. Either include them or remove the dependency array. If 'setSelectedPersona' needs the current value of 'availablePersonas', you can also switch to useReducer instead of useState and read 'availablePersonas' in the reducer.  react-hooks/exhaustive-deps
+#38 129.3 184:6  Warning: React Hook useEffect has missing dependencies: 'availablePersonas', 'chatSessionId', and 'messageHistory.length'. Either include them or remove the dependency array. If 'setSelectedPersona' needs the current value of 'availablePersonas', you can also switch to useReducer instead of useState and read 'availablePersonas' in the reducer.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/app/chat/sessionSidebar/ChatSidebar.tsx
+#38 129.3 76:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/components/Dropdown.tsx
+#38 129.3 485:6  Warning: React Hook useEffect has a missing dependency: 'handleClickOutside'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/components/SSRAutoRefresh.tsx
+#38 129.3 28:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/components/initialSetup/search/NoCompleteSourceModal.tsx
+#38 129.3 23:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 ./src/components/resizable/ResizableSection.tsx
+#38 129.3 42:6  Warning: React Hook useEffect has a missing dependency: 'width'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+#38 129.3 
+#38 129.3 info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+#38 147.9    Collecting page data ...
+#38 153.2    Generating static pages (0/53) ...
+#38 154.5    Generating static pages (13/53) 
+#38 155.6    Generating static pages (26/53) 
+#38 155.9    Generating static pages (39/53) 
+#38 156.1  ✓ Generating static pages (53/53) 
+#38 156.9    Finalizing page optimization ...
+#38 156.9    Collecting build traces ...
+#38 194.8 
+#38 194.8 Route (app)                                       Size     First Load JS
+#38 194.8 ┌ λ /_not-found                                   886 B          85.4 kB
+#38 194.8 ├ λ /admin/add-connector                          1.64 kB         123 kB
+#38 194.8 ├ λ /admin/bot                                    5.39 kB         191 kB
+#38 194.8 ├ λ /admin/bot/[id]                               384 B           177 kB
+#38 194.8 ├ λ /admin/bot/new                                238 B           177 kB
+#38 194.8 ├ λ /admin/connector/[ccPairId]                   5.97 kB         163 kB
+#38 194.8 ├ λ /admin/connectors/bookstack                   3.56 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/confluence                  3.92 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/document360                 3.69 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/file                        2.26 kB         193 kB
+#38 194.8 ├ λ /admin/connectors/github                      3.54 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/gitlab                      3.62 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/gmail                       6.4 kB          190 kB
+#38 194.8 ├ λ /admin/connectors/gmail/auth/callback         0 B                0 B
+#38 194.8 ├ λ /admin/connectors/gong                        3.7 kB          188 kB
+#38 194.8 ├ λ /admin/connectors/google-drive                7.78 kB         192 kB
+#38 194.8 ├ λ /admin/connectors/google-drive/auth/callback  0 B                0 B
+#38 194.8 ├ λ /admin/connectors/google-sites                2.14 kB         192 kB
+#38 194.8 ├ λ /admin/connectors/guru                        3.49 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/hubspot                     3.34 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/jira                        4.01 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/linear                      3.43 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/loopio                      2.67 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/notion                      3.8 kB          188 kB
+#38 194.8 ├ λ /admin/connectors/productboard                3.55 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/request-tracker             3.44 kB         187 kB
+#38 194.8 ├ λ /admin/connectors/sharepoint                  3.78 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/slab                        3.61 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/slack                       3.85 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/web                         2.45 kB         186 kB
+#38 194.8 ├ λ /admin/connectors/zendesk                     3.64 kB         188 kB
+#38 194.8 ├ λ /admin/connectors/zulip                       3.47 kB         187 kB
+#38 194.8 ├ λ /admin/documents/explorer                     3.72 kB         126 kB
+#38 194.8 ├ λ /admin/documents/feedback                     6.43 kB         145 kB
+#38 194.8 ├ λ /admin/documents/sets                         7.42 kB         193 kB
+#38 194.8 ├ λ /admin/indexing/status                        3.73 kB         167 kB
+#38 194.8 ├ λ /admin/keys/openai                            2.71 kB         169 kB
+#38 194.8 ├ λ /admin/models/embedding                       5.28 kB         147 kB
+#38 194.8 ├ λ /admin/personas                               20.6 kB         151 kB
+#38 194.8 ├ λ /admin/personas/[personaId]                   580 B           173 kB
+#38 194.8 ├ λ /admin/personas/new                           830 B           177 kB
+#38 194.8 ├ λ /admin/systeminfo                             190 B           110 kB
+#38 194.8 ├ λ /admin/users                                  2.67 kB         156 kB
+#38 194.8 ├ λ /auth/error                                   141 B          84.7 kB
+#38 194.8 ├ λ /auth/login                                   2.02 kB         173 kB
+#38 194.8 ├ λ /auth/logout                                  0 B                0 B
+#38 194.8 ├ λ /auth/oauth/callback                          0 B                0 B
+#38 194.8 ├ λ /auth/saml/callback                           0 B                0 B
+#38 194.8 ├ λ /auth/signup                                  2.02 kB         173 kB
+#38 194.8 ├ λ /auth/verify-email                            2.46 kB         104 kB
+#38 194.8 ├ λ /auth/waiting-on-verification                 1.47 kB        95.6 kB
+#38 194.8 ├ λ /chat                                         13.7 kB         231 kB
+#38 194.8 └ λ /search                                       6.18 kB         227 kB
+#38 194.8 + First Load JS shared by all                     84.5 kB
+#38 194.8   ├ chunks/8069-e4ff76c91538ac36.js               28.9 kB
+#38 194.8   ├ chunks/fd9d1056-9660570547483095.js           53.4 kB
+#38 194.8   └ other shared chunks (total)                   2.23 kB
+#38 194.8 
+#38 194.8 
+#38 194.8 λ  (Dynamic)  server-rendered on demand using Node.js
+#38 194.8 
+#38 194.9 npm notice 
+#38 194.9 npm notice New minor version of npm available! 10.2.4 -> 10.5.0
+#38 194.9 npm notice Changelog: <https://github.com/npm/cli/releases/tag/v10.5.0>
+#38 194.9 npm notice Run `npm install -g npm@10.5.0` to update!
+#38 194.9 npm notice 
+#38 DONE 195.1s
+
+#39 [web_server runner 5/7] COPY --from=builder /app/public ./public
+#39 DONE 0.1s
+
+#40 [web_server runner 6/7] COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+#40 DONE 0.6s
+
+#41 [web_server runner 7/7] COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+#41 DONE 0.1s
+
+#42 [web_server] exporting to image
+#42 exporting layers
+#42 exporting layers 0.7s done
+#42 writing image sha256:bd785b1fd2b96e94f609dae7807d85aad7f2046a988ecd8b4a41e18007aeebc8
+#42 writing image sha256:bd785b1fd2b96e94f609dae7807d85aad7f2046a988ecd8b4a41e18007aeebc8 done
+#42 naming to docker.io/danswer/danswer-web-server:latest done
+#42 DONE 0.7s
+ Container danswer-stack-index-1  Recreate
+ Container danswer-stack-relational_db-1  Recreate
+ Container danswer-stack-relational_db-1  Recreated
+ Container danswer-stack-index-1  Recreated
+ Container danswer-stack-background-1  Recreate
+ Container danswer-stack-api_server-1  Recreate
+ Container danswer-stack-api_server-1  Recreated
+ Container danswer-stack-web_server-1  Recreate
+ Container danswer-stack-web_server-1  Recreated
+ Container danswer-stack-nginx-1  Recreate
+ Container danswer-stack-nginx-1  Recreated
+ Container danswer-stack-background-1  Recreated
+ Container danswer-stack-index-1  Starting
+ Container danswer-stack-relational_db-1  Starting
+ Container danswer-stack-relational_db-1  Started
+ Container danswer-stack-index-1  Started
+ Container danswer-stack-api_server-1  Starting
+ Container danswer-stack-background-1  Starting
+ Container danswer-stack-api_server-1  Started
+ Container danswer-stack-web_server-1  Starting
+ Container danswer-stack-background-1  Started
+ Container danswer-stack-web_server-1  Started
+ Container danswer-stack-nginx-1  Starting
+ Container danswer-stack-nginx-1  Started

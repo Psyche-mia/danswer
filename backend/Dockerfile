@@ -1,5 +1,8 @@
 FROM python:3.11.7-slim-bookworm
 
+# 定义pip缓存卷
+VOLUME /pip_cache
+
 # Default DANSWER_VERSION, typically overriden during builds by GitHub Actions.
 ARG DANSWER_VERSION=0.3-dev
 ENV DANSWER_VERSION=${DANSWER_VERSION}
@@ -19,7 +22,11 @@ RUN apt-get update && \
 # Install Python dependencies
 # Remove py which is pulled in by retry, py is not needed and is a CVE
 COPY ./requirements/default.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /tmp/requirements.txt && \
+# RUN pip install --no-cache-dir --upgrade -r /tmp/requirements.txt && \
+#     pip uninstall -y py && \
+#     playwright install chromium && playwright install-deps chromium && \
+#     ln -s /usr/local/bin/supervisord /usr/bin/supervisord
+RUN --mount=type=cache,target=/pip_cache pip install --cache-dir=/pip_cache --upgrade -r /tmp/requirements.txt && \
     pip uninstall -y py && \
     playwright install chromium && playwright install-deps chromium && \
     ln -s /usr/local/bin/supervisord /usr/bin/supervisord
