@@ -1,4 +1,5 @@
 from openai import OpenAI
+import httpx
 
 
 VALID_MODEL_LIST = [
@@ -30,7 +31,12 @@ if __name__ == "__main__":
 
     api_key = input("Please provide an OpenAI API Key to test: ")
     client = OpenAI(
+        base_url="https://api.xty.app/v1",
         api_key=api_key,
+        http_client=httpx.Client(
+            base_url="https://api.xty.app/v1",
+            follow_redirects=True,
+        ),
     )
 
     prompt = "The boy went to the "
